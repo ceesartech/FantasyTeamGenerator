@@ -60,20 +60,20 @@ Repository: **https://github.com/ceesartech/FantasyTeamGenerator**
 
 ```mermaid
 graph TD
-  EB[EventBridge Schedules] --> SFN[Step Functions Scoring Pipeline]
-  API[API Gateway] --> LAPI[Lambda: FastAPI]
-  LAPI --> DDB[(DynamoDB: squads)]
-  SFN --> LING[Lambda: Ingest FPL]
-  LING --> S3R[(S3: raw)]
-  SFN --> LFEAT[Lambda/SageMaker Processing: Features]
-  LFEAT --> S3Ref[(S3: refined)]
-  SFN --> LBINF[Lambda: Batch Inference Launcher]
-  LBINF --> SM[Amazon SageMaker Batch Transform]
+  EB[EventBridge schedules] --> SFN[Step Functions scoring pipeline]
+  API[API Gateway] --> LAPI[Lambda FastAPI]
+  LAPI --> DDB[(DynamoDB squads)]
+  SFN --> LING[Lambda ingest FPL]
+  LING --> S3R[(S3 raw)]
+  SFN --> LFEAT[Processing features]
+  LFEAT --> S3Ref[(S3 refined)]
+  SFN --> LBINF[Lambda batch inference launcher]
+  LBINF --> SM[SageMaker Batch Transform]
   SM --> S3Ref
-  SFN --> LOPT[Lambda (container): Optimizer]
+  SFN --> LOPT[Lambda optimizer container]
   LOPT --> DDB
-  SFN --> SNS[SNS: Alerts]
-  UI[React (Vite)] -->|fetch| API
+  SFN --> SNS[SNS alerts]
+  UI[React Vite] -->|fetch| API
 ```
 _____________________________________________________________________
 
